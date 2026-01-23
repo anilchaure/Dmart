@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h3>Cart Items</h3>
+        {% for p in products %}
+        <div class="card mb-2 p-2 border-0 shadow-sm d-flex flex-row align-items-center">
+            <img src="{{ url_for('static', filename='images/' + p.img_file) }}" width="50">
+            <div class="ms-3"><b>{{ p.name }}</b> - <span class="text-success">₹{{ p.price }}</span></div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-4">
+        <div class="card p-4 shadow-sm border-0">
+            <h5>Total: ₹{{ total }}</h5>
+            <form action="/checkout" method="POST">
+                <input type="text" class="form-control mb-2" placeholder="Card Number" required>
+                <button type="submit" class="btn btn-success w-100">Pay Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
